@@ -1,0 +1,84 @@
+buildscript {
+	ext {
+		springBootVersion = '1.3.5.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'spring-boot' 
+apply plugin: 'war'
+
+
+war {
+	baseName = 'zeng'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	providedRuntime
+}
+
+dependencies {
+	compile('org.activiti:activiti-spring-boot-starter-basic:5.19.0')
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('org.springframework.boot:spring-boot-starter-batch')
+	compile('org.springframework.boot:spring-boot-starter-cache')
+	compile('org.springframework.cloud:spring-cloud-starter-zuul')
+	compile('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	compile('org.springframework.data:spring-data-rest-hal-browser')
+	compile('org.springframework.boot:spring-boot-devtools')
+	compile('org.springframework.boot:spring-boot-starter-hateoas')
+	compile('org.springframework.boot:spring-boot-starter-hornetq')
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('org.springframework.boot:spring-boot-starter-jersey')
+	compile('org.springframework.boot:spring-boot-starter-jta-atomikos')
+	compile('org.projectlombok:lombok:1.16.6')
+	compile('org.springframework.boot:spring-boot-starter-remote-shell')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.session:spring-session')
+	compile('org.springframework.boot:spring-boot-starter-social-facebook')
+	compile('org.springframework.boot:spring-boot-starter-social-linkedin')
+	compile('org.springframework.boot:spring-boot-starter-social-twitter')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('com.vaadin:vaadin-spring-boot-starter:1.0.0')
+	compile('org.springframework.boot:spring-boot-starter-validation')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-ws')
+	compile('org.springframework.boot:spring-boot-starter-websocket')
+	runtime('org.postgresql:postgresql')
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test') 
+	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
+}
+
+dependencyManagement {
+	imports { 
+		mavenBom "com.vaadin:vaadin-bom:7.6.3" 
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR1" 
+	}
+}
+
+
+eclipse {
+	classpath {
+		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+		 containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+	}
+}
